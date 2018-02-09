@@ -46,6 +46,16 @@ import UIKit
         }
         return color
     }
+  
+    public class func fontForKeyPath(_ keyPath: String) -> UIFont? {
+        guard let raw = string(for: keyPath) else { return nil }
+        let components = raw.split(separator: "@")
+        guard let fontName = components.first, let size = components.last, let sizeNumber = Double(String(size)), let font = UIFont(name: String(fontName), size: CGFloat(sizeNumber)) else {
+            print("SwiftTheme WARNING: Not convert raw font \(raw) at key path: \(keyPath)")
+            return nil
+        }
+        return font
+    }
     
     public class func image(for keyPath: String) -> UIImage? {
         guard let imageName = string(for: keyPath) else { return nil }

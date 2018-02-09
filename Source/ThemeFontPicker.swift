@@ -9,17 +9,29 @@
 import UIKit
 
 @objc public final class ThemeFontPicker: ThemePicker {
-    
+  
     public convenience init(keyPath: String, map: @escaping (Any?) -> UIFont?) {
         self.init(v: { map(ThemeManager.value(for: keyPath)) })
+    }
+  
+    public required convenience init(stringLiteral value: String) {
+        self.init(keyPath: value)
     }
     
     public convenience init(fonts: UIFont...) {
         self.init(v: { ThemeManager.element(for: fonts) })
     }
+  
+    public convenience init(keyPath: String) {
+        self.init(v: { ThemeManager.fontForKeyPath(keyPath) })
+    }
     
     public required convenience init(arrayLiteral elements: UIFont...) {
         self.init(v: { ThemeManager.element(for: elements) })
+    }
+  
+    public class func pickerWithKeyPath(_ keyPath: String) -> ThemeFontPicker {
+        return ThemeFontPicker(keyPath: keyPath)
     }
     
 }
@@ -37,3 +49,4 @@ import UIKit
 }
 
 extension ThemeFontPicker: ExpressibleByArrayLiteral {}
+extension ThemeFontPicker: ExpressibleByStringLiteral {}

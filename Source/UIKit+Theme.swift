@@ -231,6 +231,10 @@ import UIKit
         get { return getThemePicker(self, "setFillColor:") as? ThemeCGColorPicker }
         set { setThemePicker(self, "setFillColor:", newValue) }
     }
+    var theme_cornerRadius: ThemeCGFloatPicker? {
+        get { return getThemePicker(self, "setCornerRadius:") as? ThemeCGFloatPicker }
+        set { setThemePicker(self, "setCornerRadius:", newValue) }
+    }
 }
 
 #if os(iOS)
